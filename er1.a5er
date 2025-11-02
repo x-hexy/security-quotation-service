@@ -1,0 +1,887 @@
+﻿# A5:ER FORMAT:19
+# A5:ER ENCODING:UTF8
+# A5:ER Mk-1 Copyright © 2007 m.matsubara
+# A5:SQL Mk-2 Version 2.20.4 Copyright © 1997 - 2025 m.matsubara
+#  https://a5m2.mmatsubara.com
+
+[Manager]
+ProjectName=
+Author=
+MaxEntityRowShow=1000
+ReadOnlyRecommend=0
+Page=Main
+PageInfo="Main",2,"A3Landscape",$FFFFFF
+LogicalView=1
+DecodeDomain=0
+ViewModePageIndividually=1
+ViewMode=2
+ViewFormat=0
+UseNondependenceDashLine=0
+FontName=Tahoma
+FontSize=6
+PaperSize=A4Landscape
+HeaderLeft=
+HeaderCenter=
+HeaderRight=
+FooterLeft=
+FooterCenter=
+FooterRight=
+ShowPageoutRelation=1
+DefaultPkName=%0:s_PKC
+DefaultPkIndexName=%0:s_PKI
+DefaultIndexName=%0:s_IX%1:d
+DefaultFkName=%0:s_FK%1:d
+SqlSeparator=0
+UpperCaseKeyword=0
+ShowTag=1
+ShowCommonAttributes=0
+BugFixEntityWidth=1
+
+[Entity]
+PName=attachment
+LName=attachment
+Comment=
+TableInnerOption=
+TableOption=
+Page=MAIN
+Left=50
+Top=50
+Field="attachment_id","attachment_id","character varying(36)","NOT NULL",0,"","",$FFFFFFFF,""
+Field="request_id","request_id","character varying(36)","NOT NULL",,"","",$FFFFFFFF,""
+Field="file_name","file_name","character varying(255)","NOT NULL",,"","",$FFFFFFFF,""
+Field="file_type","file_type","character varying(100)","NOT NULL",,"","",$FFFFFFFF,""
+Field="storage_location","storage_location","text","NOT NULL",,"","",$FFFFFFFF,""
+Field="description","description","text",,,"","",$FFFFFFFF,""
+Field="is_confidential","is_confidential","boolean","NOT NULL",,"false","",$FFFFFFFF,""
+Field="created_at","created_at","timestamp(6) without time zone","NOT NULL",,"","",$FFFFFFFF,""
+Field="updated_at","updated_at","timestamp(6) without time zone","NOT NULL",,"","",$FFFFFFFF,""
+Index=idx_attachment_confidential=0,is_confidential
+Index=idx_attachment_request=0,request_id
+EffectMode=None
+Color=$000000
+BkColor=$FFFFFF
+Position="MAIN",50,50
+ZOrder=-1
+
+[Entity]
+PName=contract
+LName=contract
+Comment=
+TableInnerOption=
+TableOption=
+Page=MAIN
+Left=650
+Top=50
+Field="contract_id","contract_id","character varying(36)","NOT NULL",0,"","",$FFFFFFFF,""
+Field="quote_id","quote_id","character varying(36)","NOT NULL",,"","",$FFFFFFFF,""
+Field="request_id","request_id","character varying(36)","NOT NULL",,"","",$FFFFFFFF,""
+Field="contract_status","contract_status","character varying(50)","NOT NULL",,"","",$FFFFFFFF,""
+Field="agreed_amount","agreed_amount","numeric(12, 2)",,,"","",$FFFFFFFF,""
+Field="start_datetime","start_datetime","timestamp(6) without time zone","NOT NULL",,"","",$FFFFFFFF,""
+Field="end_datetime","end_datetime","timestamp(6) without time zone","NOT NULL",,"","",$FFFFFFFF,""
+Field="terms_summary","terms_summary","text",,,"","",$FFFFFFFF,""
+Field="created_at","created_at","timestamp(6) without time zone","NOT NULL",,"","",$FFFFFFFF,""
+Field="updated_at","updated_at","timestamp(6) without time zone","NOT NULL",,"","",$FFFFFFFF,""
+Index=idx_contract_quote=0,quote_id
+Index=idx_contract_request=0,request_id
+Index=idx_contract_status=0,contract_status
+EffectMode=None
+Color=$000000
+BkColor=$FFFFFF
+Position="MAIN",650,50
+ZOrder=-3
+
+[Entity]
+PName=attachment_access_control
+LName=attachment_access_control
+Comment=
+TableInnerOption=
+TableOption=
+Page=MAIN
+Left=350
+Top=150
+Field="attachment_id","attachment_id","character varying(36)","NOT NULL",0,"","",$FFFFFFFF,""
+Field="role_code","role_code","character varying(100)","NOT NULL",1,"","",$FFFFFFFF,""
+Field="access_level","access_level","character varying(50)","NOT NULL",,"","",$FFFFFFFF,""
+Field="created_at","created_at","timestamp(6) without time zone","NOT NULL",,"","",$FFFFFFFF,""
+Field="updated_at","updated_at","timestamp(6) without time zone","NOT NULL",,"","",$FFFFFFFF,""
+Index=idx_attach_acl_role=0,role_code,access_level
+EffectMode=None
+Color=$000000
+BkColor=$FFFFFF
+Position="MAIN",350,150
+ZOrder=-2
+
+[Entity]
+PName=invoice
+LName=invoice
+Comment=
+TableInnerOption=
+TableOption=
+Page=MAIN
+Left=1250
+Top=300
+Field="invoice_id","invoice_id","character varying(36)","NOT NULL",0,"","",$FFFFFFFF,""
+Field="contract_id","contract_id","character varying(36)","NOT NULL",,"","",$FFFFFFFF,""
+Field="invoice_number","invoice_number","character varying(100)","NOT NULL",,"","",$FFFFFFFF,""
+Field="billing_period_start","billing_period_start","date","NOT NULL",,"","",$FFFFFFFF,""
+Field="billing_period_end","billing_period_end","date","NOT NULL",,"","",$FFFFFFFF,""
+Field="invoice_amount","invoice_amount","numeric(12, 2)","NOT NULL",,"","",$FFFFFFFF,""
+Field="tax_amount","tax_amount","numeric(12, 2)","NOT NULL",,"","",$FFFFFFFF,""
+Field="total_with_tax","total_with_tax","numeric(12, 2)","NOT NULL",,"","",$FFFFFFFF,""
+Field="payment_due_date","payment_due_date","date",,,"","",$FFFFFFFF,""
+Field="payment_status","payment_status","character varying(50)","NOT NULL",,"","",$FFFFFFFF,""
+Field="created_at","created_at","timestamp(6) without time zone","NOT NULL",,"","",$FFFFFFFF,""
+Field="updated_at","updated_at","timestamp(6) without time zone","NOT NULL",,"","",$FFFFFFFF,""
+Index=idx_invoice_contract=0,contract_id
+Index=idx_invoice_period=0,billing_period_start,billing_period_end
+Index=idx_invoice_status=0,payment_status
+Index=uq_invoice_number=2,invoice_number
+EffectMode=None
+Color=$000000
+BkColor=$FFFFFF
+Position="MAIN",1250,300
+ZOrder=-5
+
+[Entity]
+PName=customer
+LName=customer
+Comment=
+TableInnerOption=
+TableOption=
+Page=MAIN
+Left=600
+Top=450
+Field="customer_id","customer_id","character varying(36)","NOT NULL",0,"","",$FFFFFFFF,""
+Field="customer_name","customer_name","character varying(255)","NOT NULL",,"","",$FFFFFFFF,""
+Field="customer_type","customer_type","character varying(50)","NOT NULL",,"","",$FFFFFFFF,""
+Field="billing_address","billing_address","text",,,"","",$FFFFFFFF,""
+Field="contact_person_name","contact_person_name","character varying(255)",,,"","",$FFFFFFFF,""
+Field="contact_phone","contact_phone","character varying(50)",,,"","",$FFFFFFFF,""
+Field="contact_email","contact_email","character varying(255)",,,"","",$FFFFFFFF,""
+Field="notes","notes","text",,,"","",$FFFFFFFF,""
+Field="is_active","is_active","boolean","NOT NULL",,"true","",$FFFFFFFF,""
+Field="created_at","created_at","timestamp(6) without time zone","NOT NULL",,"","",$FFFFFFFF,""
+Field="updated_at","updated_at","timestamp(6) without time zone","NOT NULL",,"","",$FFFFFFFF,""
+Index=idx_customer_active=0,is_active
+Index=idx_customer_name=0,customer_name
+EffectMode=None
+Color=$000000
+BkColor=$FFFFFF
+Position="MAIN",600,450
+ZOrder=-4
+
+[Entity]
+PName=quote
+LName=quote
+Comment=
+TableInnerOption=
+TableOption=
+Page=MAIN
+Left=1600
+Top=450
+Field="quote_id","quote_id","character varying(36)","NOT NULL",0,"","",$FFFFFFFF,""
+Field="request_id","request_id","character varying(36)","NOT NULL",,"","",$FFFFFFFF,""
+Field="quote_version_no","quote_version_no","integer","NOT NULL",,"","",$FFFFFFFF,""
+Field="quote_status","quote_status","character varying(50)","NOT NULL",,"","",$FFFFFFFF,""
+Field="total_amount","total_amount","numeric(12, 2)","NOT NULL",,"0","",$FFFFFFFF,""
+Field="currency","currency","character varying(10)","NOT NULL",,"\qJPY\q","",$FFFFFFFF,""
+Field="valid_until_datetime","valid_until_datetime","timestamp(6) without time zone",,,"","",$FFFFFFFF,""
+Field="discount_note","discount_note","text",,,"","",$FFFFFFFF,""
+Field="internal_margin_rate","internal_margin_rate","numeric(5, 2)",,,"","",$FFFFFFFF,""
+Field="created_at","created_at","timestamp(6) without time zone","NOT NULL",,"","",$FFFFFFFF,""
+Field="updated_at","updated_at","timestamp(6) without time zone","NOT NULL",,"","",$FFFFFFFF,""
+Index=idx_quote_request=0,request_id
+Index=idx_quote_status=0,quote_status
+Index=uq_quote_request_version=2,request_id,quote_version_no
+EffectMode=None
+Color=$000000
+BkColor=$FFFFFF
+Position="MAIN",1600,450
+ZOrder=-7
+
+[Entity]
+PName=qualification_type
+LName=qualification_type
+Comment=
+TableInnerOption=
+TableOption=
+Page=MAIN
+Left=1650
+Top=50
+Field="qualification_type_id","qualification_type_id","character varying(36)","NOT NULL",0,"","",$FFFFFFFF,""
+Field="qualification_code","qualification_code","character varying(255)","NOT NULL",,"","",$FFFFFFFF,""
+Field="description","description","text",,,"","",$FFFFFFFF,""
+Field="is_legal_requirement","is_legal_requirement","boolean","NOT NULL",,"false","",$FFFFFFFF,""
+Field="created_at","created_at","timestamp(6) without time zone","NOT NULL",,"","",$FFFFFFFF,""
+Field="updated_at","updated_at","timestamp(6) without time zone","NOT NULL",,"","",$FFFFFFFF,""
+Index=idx_qualification_legal=0,is_legal_requirement
+Index=uq_qualification_code=2,qualification_code
+EffectMode=None
+Color=$000000
+BkColor=$FFFFFF
+Position="MAIN",1650,50
+ZOrder=-6
+
+[Entity]
+PName=request
+LName=request
+Comment=
+TableInnerOption=
+TableOption=
+Page=MAIN
+Left=2750
+Top=500
+Field="request_id","request_id","character varying(36)","NOT NULL",0,"","",$FFFFFFFF,""
+Field="site_id","site_id","character varying(36)","NOT NULL",,"","",$FFFFFFFF,""
+Field="customer_id","customer_id","character varying(36)","NOT NULL",,"","",$FFFFFFFF,""
+Field="request_title","request_title","character varying(255)","NOT NULL",,"","",$FFFFFFFF,""
+Field="description","description","text",,,"","",$FFFFFFFF,""
+Field="start_datetime","start_datetime","timestamp(6) without time zone","NOT NULL",,"","",$FFFFFFFF,""
+Field="end_datetime","end_datetime","timestamp(6) without time zone","NOT NULL",,"","",$FFFFFFFF,""
+Field="expected_crowd_size","expected_crowd_size","integer",,,"","",$FFFFFFFF,""
+Field="request_status","request_status","character varying(50)","NOT NULL",,"","",$FFFFFFFF,""
+Field="location_details","location_details","text",,,"","",$FFFFFFFF,""
+Field="special_requirements_summary","special_requirements_summary","text",,,"","",$FFFFFFFF,""
+Field="created_at","created_at","timestamp(6) without time zone","NOT NULL",,"","",$FFFFFFFF,""
+Field="updated_at","updated_at","timestamp(6) without time zone","NOT NULL",,"","",$FFFFFFFF,""
+Index=idx_request_customer=0,customer_id
+Index=idx_request_period=0,start_datetime,end_datetime
+Index=idx_request_site=0,site_id
+Index=idx_request_status=0,request_status
+EffectMode=None
+Color=$000000
+BkColor=$FFFFFF
+Position="MAIN",2750,500
+ZOrder=-10
+
+[Entity]
+PName=rate_profile
+LName=rate_profile
+Comment=
+TableInnerOption=
+TableOption=
+Page=MAIN
+Left=2450
+Top=50
+Field="rate_profile_id","rate_profile_id","character varying(36)","NOT NULL",0,"","",$FFFFFFFF,""
+Field="qualification_type_id","qualification_type_id","character varying(36)",,,"","",$FFFFFFFF,""
+Field="region_code","region_code","character varying(100)","NOT NULL",,"","",$FFFFFFFF,""
+Field="time_band","time_band","character varying(50)","NOT NULL",,"","",$FFFFFFFF,""
+Field="base_rate_cost_per_hour","base_rate_cost_per_hour","numeric(12, 2)","NOT NULL",,"","",$FFFFFFFF,""
+Field="base_rate_price_per_hour","base_rate_price_per_hour","numeric(12, 2)","NOT NULL",,"","",$FFFFFFFF,""
+Field="surcharge_type","surcharge_type","character varying(100)",,,"","",$FFFFFFFF,""
+Field="surcharge_ratio","surcharge_ratio","numeric(5, 2)",,,"","",$FFFFFFFF,""
+Field="valid_from","valid_from","timestamp(6) without time zone","NOT NULL",,"","",$FFFFFFFF,""
+Field="valid_to","valid_to","timestamp(6) without time zone",,,"","",$FFFFFFFF,""
+Field="created_at","created_at","timestamp(6) without time zone","NOT NULL",,"","",$FFFFFFFF,""
+Field="updated_at","updated_at","timestamp(6) without time zone","NOT NULL",,"","",$FFFFFFFF,""
+Index=idx_rate_profile_lookup=0,region_code,time_band,qualification_type_id
+Index=idx_rate_profile_valid=0,valid_from,valid_to
+EffectMode=None
+Color=$000000
+BkColor=$FFFFFF
+Position="MAIN",2450,50
+ZOrder=-9
+
+[Entity]
+PName=quote_line_item
+LName=quote_line_item
+Comment=
+TableInnerOption=
+TableOption=
+Page=MAIN
+Left=2150
+Top=50
+Field="quote_line_item_id","quote_line_item_id","character varying(36)","NOT NULL",0,"","",$FFFFFFFF,""
+Field="quote_id","quote_id","character varying(36)","NOT NULL",,"","",$FFFFFFFF,""
+Field="shift_req_id","shift_req_id","character varying(36)",,,"","",$FFFFFFFF,""
+Field="line_description","line_description","text","NOT NULL",,"","",$FFFFFFFF,""
+Field="unit_type","unit_type","character varying(50)","NOT NULL",,"","",$FFFFFFFF,""
+Field="unit_price","unit_price","numeric(12, 2)","NOT NULL",,"","",$FFFFFFFF,""
+Field="quantity","quantity","numeric(12, 2)","NOT NULL",,"","",$FFFFFFFF,""
+Field="line_amount","line_amount","numeric(12, 2)","NOT NULL",,"","",$FFFFFFFF,""
+Field="notes_customer_visible","notes_customer_visible","text",,,"","",$FFFFFFFF,""
+Field="notes_internal","notes_internal","text",,,"","",$FFFFFFFF,""
+Field="created_at","created_at","timestamp(6) without time zone","NOT NULL",,"","",$FFFFFFFF,""
+Field="updated_at","updated_at","timestamp(6) without time zone","NOT NULL",,"","",$FFFFFFFF,""
+Index=idx_qli_quote=0,quote_id
+Index=idx_qli_shift=0,shift_req_id
+EffectMode=None
+Color=$000000
+BkColor=$FFFFFF
+Position="MAIN",2150,50
+ZOrder=-8
+
+[Entity]
+PName=security_task
+LName=security_task
+Comment=
+TableInnerOption=
+TableOption=
+Page=MAIN
+Left=3450
+Top=350
+Field="task_id","task_id","character varying(36)","NOT NULL",0,"","",$FFFFFFFF,""
+Field="request_id","request_id","character varying(36)","NOT NULL",,"","",$FFFFFFFF,""
+Field="task_name","task_name","character varying(255)","NOT NULL",,"","",$FFFFFFFF,""
+Field="task_description","task_description","text",,,"","",$FFFFFFFF,""
+Field="area_or_post","area_or_post","character varying(255)",,,"","",$FFFFFFFF,""
+Field="required_language","required_language","character varying(100)",,,"","",$FFFFFFFF,""
+Field="notes","notes","text",,,"","",$FFFFFFFF,""
+Field="created_at","created_at","timestamp(6) without time zone","NOT NULL",,"","",$FFFFFFFF,""
+Field="updated_at","updated_at","timestamp(6) without time zone","NOT NULL",,"","",$FFFFFFFF,""
+Index=idx_task_request=0,request_id
+EffectMode=None
+Color=$000000
+BkColor=$FFFFFF
+Position="MAIN",3450,350
+ZOrder=-12
+
+[Entity]
+PName=risk_note
+LName=risk_note
+Comment=
+TableInnerOption=
+TableOption=
+Page=MAIN
+Left=3100
+Top=250
+Field="risk_note_id","risk_note_id","character varying(36)","NOT NULL",0,"","",$FFFFFFFF,""
+Field="request_id","request_id","character varying(36)","NOT NULL",,"","",$FFFFFFFF,""
+Field="risk_category","risk_category","character varying(100)","NOT NULL",,"","",$FFFFFFFF,""
+Field="risk_description","risk_description","text","NOT NULL",,"","",$FFFFFFFF,""
+Field="mitigation_plan_summary","mitigation_plan_summary","text",,,"","",$FFFFFFFF,""
+Field="surcharge_implication_flag","surcharge_implication_flag","boolean","NOT NULL",,"false","",$FFFFFFFF,""
+Field="created_at","created_at","timestamp(6) without time zone","NOT NULL",,"","",$FFFFFFFF,""
+Field="updated_at","updated_at","timestamp(6) without time zone","NOT NULL",,"","",$FFFFFFFF,""
+Index=idx_risk_category=0,risk_category
+Index=idx_risk_request=0,request_id
+EffectMode=None
+Color=$000000
+BkColor=$FFFFFF
+Position="MAIN",3100,250
+ZOrder=-11
+
+[Entity]
+PName=site
+LName=site
+Comment=
+TableInnerOption=
+TableOption=
+Page=MAIN
+Left=50
+Top=450
+Field="site_id","site_id","character varying(36)","NOT NULL",0,"","",$FFFFFFFF,""
+Field="customer_id","customer_id","character varying(36)","NOT NULL",,"","",$FFFFFFFF,""
+Field="site_name","site_name","character varying(255)","NOT NULL",,"","",$FFFFFFFF,""
+Field="address","address","text",,,"","",$FFFFFFFF,""
+Field="site_type","site_type","character varying(50)",,,"","",$FFFFFFFF,""
+Field="normal_operating_hours","normal_operating_hours","text",,,"","",$FFFFFFFF,""
+Field="risk_level_baseline","risk_level_baseline","character varying(50)",,,"","",$FFFFFFFF,""
+Field="access_rules_summary","access_rules_summary","text",,,"","",$FFFFFFFF,""
+Field="notes","notes","text",,,"","",$FFFFFFFF,""
+Field="is_active","is_active","boolean","NOT NULL",,"true","",$FFFFFFFF,""
+Field="created_at","created_at","timestamp(6) without time zone","NOT NULL",,"","",$FFFFFFFF,""
+Field="updated_at","updated_at","timestamp(6) without time zone","NOT NULL",,"","",$FFFFFFFF,""
+Index=idx_site_customer=0,customer_id
+Index=idx_site_name=0,site_name
+EffectMode=None
+Color=$000000
+BkColor=$FFFFFF
+Position="MAIN",50,450
+ZOrder=-15
+
+[Entity]
+PName=shiftreq_qualification
+LName=shiftreq_qualification
+Comment=
+TableInnerOption=
+TableOption=
+Page=MAIN
+Left=3950
+Top=50
+Field="shift_req_id","shift_req_id","character varying(36)","NOT NULL",0,"","",$FFFFFFFF,""
+Field="qualification_type_id","qualification_type_id","character varying(36)","NOT NULL",1,"","",$FFFFFFFF,""
+Field="min_headcount_with_this_qual","min_headcount_with_this_qual","integer",,,"","",$FFFFFFFF,""
+Field="requirement_level","requirement_level","character varying(50)",,,"","",$FFFFFFFF,""
+Field="notes","notes","text",,,"","",$FFFFFFFF,""
+Field="created_at","created_at","timestamp(6) without time zone","NOT NULL",,"","",$FFFFFFFF,""
+Field="updated_at","updated_at","timestamp(6) without time zone","NOT NULL",,"","",$FFFFFFFF,""
+Index=idx_shiftqual_qual=0,qualification_type_id
+EffectMode=None
+Color=$000000
+BkColor=$FFFFFF
+Position="MAIN",3950,50
+ZOrder=-14
+
+[Entity]
+PName=shift_requirement
+LName=shift_requirement
+Comment=
+TableInnerOption=
+TableOption=
+Page=MAIN
+Left=3750
+Top=600
+Field="shift_req_id","shift_req_id","character varying(36)","NOT NULL",0,"","",$FFFFFFFF,""
+Field="task_id","task_id","character varying(36)","NOT NULL",,"","",$FFFFFFFF,""
+Field="rate_profile_id","rate_profile_id","character varying(36)",,,"","",$FFFFFFFF,""
+Field="shift_start_datetime","shift_start_datetime","timestamp(6) without time zone","NOT NULL",,"","",$FFFFFFFF,""
+Field="shift_end_datetime","shift_end_datetime","timestamp(6) without time zone","NOT NULL",,"","",$FFFFFFFF,""
+Field="required_headcount","required_headcount","integer","NOT NULL",,"","",$FFFFFFFF,""
+Field="risk_level_override","risk_level_override","character varying(50)",,,"","",$FFFFFFFF,""
+Field="location_detail_override","location_detail_override","text",,,"","",$FFFFFFFF,""
+Field="notes","notes","text",,,"","",$FFFFFFFF,""
+Field="created_at","created_at","timestamp(6) without time zone","NOT NULL",,"","",$FFFFFFFF,""
+Field="updated_at","updated_at","timestamp(6) without time zone","NOT NULL",,"","",$FFFFFFFF,""
+Index=idx_shift_rate=0,rate_profile_id
+Index=idx_shift_task=0,task_id
+Index=idx_shift_time=0,shift_start_datetime,shift_end_datetime
+EffectMode=None
+Color=$000000
+BkColor=$FFFFFF
+Position="MAIN",3750,600
+ZOrder=-13
+
+[Relation]
+Entity1=security_task
+Entity2=shift_requirement
+RelationType1=2
+RelationType2=3
+Fields1=task_id
+Fields2=task_id
+Cardinarity1=
+Cardinarity2=
+Position="MAIN",0,4700,3400,6279,R,R,""
+Dependence=0
+Caption=
+PName=
+LineMode=0
+Bar1=470
+Bar2=340
+Bar3=628
+TermPos1=R
+TermPos2=R
+ZOrder=-30
+
+[Relation]
+Entity1=customer
+Entity2=site
+RelationType1=2
+RelationType2=3
+Fields1=customer_id
+Fields2=customer_id
+Cardinarity1=
+Cardinarity2=
+Position="MAIN",0,2700,7800,900,R,R,""
+Dependence=0
+Caption=
+PName=
+LineMode=0
+Bar1=270
+Bar2=780
+Bar3=90
+TermPos1=R
+TermPos2=R
+ZOrder=-31
+
+[Relation]
+Entity1=rate_profile
+Entity2=shift_requirement
+RelationType1=1
+RelationType2=3
+Fields1=rate_profile_id
+Fields2=rate_profile_id
+Cardinarity1=
+Cardinarity2=
+Position="MAIN",0,6800,200,7200,R,R,""
+Dependence=0
+Caption=
+PName=
+LineMode=0
+Bar1=680
+Bar2=20
+Bar3=720
+TermPos1=R
+TermPos2=R
+ZOrder=-29
+
+[Relation]
+Entity1=request
+Entity2=risk_note
+RelationType1=2
+RelationType2=3
+Fields1=request_id
+Fields2=request_id
+Cardinarity1=
+Cardinarity2=
+Position="MAIN",0,6600,2100,600,R,R,""
+Dependence=0
+Caption=
+PName=
+LineMode=0
+Bar1=660
+Bar2=210
+Bar3=60
+TermPos1=R
+TermPos2=R
+ZOrder=-28
+
+[Relation]
+Entity1=site
+Entity2=request
+RelationType1=2
+RelationType2=3
+Fields1=site_id
+Fields2=site_id
+Cardinarity1=
+Cardinarity2=
+Position="MAIN",0,6800,800,7900,R,R,""
+Dependence=0
+Caption=
+PName=
+LineMode=0
+Bar1=680
+Bar2=80
+Bar3=790
+TermPos1=R
+TermPos2=R
+ZOrder=-27
+
+[Relation]
+Entity1=security_task
+Entity2=task_qualification
+RelationType1=2
+RelationType2=3
+Fields1=task_id
+Fields2=task_id
+Cardinarity1=
+Cardinarity2=
+Position="MAIN",0,2400,5200,9900,R,R,""
+Dependence=1
+Caption=
+PName=
+LineMode=0
+Bar1=240
+Bar2=520
+Bar3=990
+TermPos1=R
+TermPos2=R
+ZOrder=-36
+
+[Relation]
+Entity1=qualification_type
+Entity2=task_qualification
+RelationType1=2
+RelationType2=3
+Fields1=qualification_type_id
+Fields2=qualification_type_id
+Cardinarity1=
+Cardinarity2=
+Position="MAIN",0,200,600,3200,R,R,""
+Dependence=1
+Caption=
+PName=
+LineMode=0
+Bar1=20
+Bar2=60
+Bar3=320
+TermPos1=R
+TermPos2=R
+ZOrder=-35
+
+[Relation]
+Entity1=request
+Entity2=security_task
+RelationType1=2
+RelationType2=3
+Fields1=request_id
+Fields2=request_id
+Cardinarity1=
+Cardinarity2=
+Position="MAIN",0,4600,8900,6500,R,R,""
+Dependence=0
+Caption=
+PName=
+LineMode=0
+Bar1=460
+Bar2=890
+Bar3=650
+TermPos1=R
+TermPos2=R
+ZOrder=-34
+
+[Relation]
+Entity1=shift_requirement
+Entity2=shiftreq_qualification
+RelationType1=2
+RelationType2=3
+Fields1=shift_req_id
+Fields2=shift_req_id
+Cardinarity1=
+Cardinarity2=
+Position="MAIN",0,4200,5600,5100,R,R,""
+Dependence=1
+Caption=
+PName=
+LineMode=0
+Bar1=420
+Bar2=560
+Bar3=510
+TermPos1=R
+TermPos2=R
+ZOrder=-33
+
+[Relation]
+Entity1=qualification_type
+Entity2=shiftreq_qualification
+RelationType1=2
+RelationType2=3
+Fields1=qualification_type_id
+Fields2=qualification_type_id
+Cardinarity1=
+Cardinarity2=
+Position="MAIN",0,5500,7900,5052,R,R,""
+Dependence=1
+Caption=
+PName=
+LineMode=0
+Bar1=550
+Bar2=790
+Bar3=505
+TermPos1=R
+TermPos2=R
+ZOrder=-32
+
+[Relation]
+Entity1=customer
+Entity2=request
+RelationType1=2
+RelationType2=3
+Fields1=customer_id
+Fields2=customer_id
+Cardinarity1=
+Cardinarity2=
+Position="MAIN",0,8000,9500,2000,R,R,""
+Dependence=0
+Caption=
+PName=
+LineMode=0
+Bar1=800
+Bar2=950
+Bar3=200
+TermPos1=R
+TermPos2=R
+ZOrder=-26
+
+[Relation]
+Entity1=request
+Entity2=contract
+RelationType1=2
+RelationType2=3
+Fields1=request_id
+Fields2=request_id
+Cardinarity1=
+Cardinarity2=
+Position="MAIN",0,7200,2800,6100,R,R,""
+Dependence=0
+Caption=
+PName=
+LineMode=0
+Bar1=720
+Bar2=280
+Bar3=610
+TermPos1=R
+TermPos2=R
+ZOrder=-20
+
+[Relation]
+Entity1=quote
+Entity2=contract
+RelationType1=2
+RelationType2=3
+Fields1=quote_id
+Fields2=quote_id
+Cardinarity1=
+Cardinarity2=
+Position="MAIN",0,300,8800,5600,R,R,""
+Dependence=0
+Caption=
+PName=
+LineMode=0
+Bar1=30
+Bar2=880
+Bar3=560
+TermPos1=R
+TermPos2=R
+ZOrder=-19
+
+[Relation]
+Entity1=request
+Entity2=attachment
+RelationType1=2
+RelationType2=3
+Fields1=request_id
+Fields2=request_id
+Cardinarity1=
+Cardinarity2=
+Position="MAIN",0,900,3300,688,R,R,""
+Dependence=0
+Caption=
+PName=
+LineMode=0
+Bar1=90
+Bar2=330
+Bar3=69
+TermPos1=R
+TermPos2=R
+ZOrder=-18
+
+[Relation]
+Entity1=attachment
+Entity2=attachment_access_control
+RelationType1=2
+RelationType2=3
+Fields1=attachment_id
+Fields2=attachment_id
+Cardinarity1=
+Cardinarity2=
+Position="MAIN",0,9600,8200,4900,R,R,""
+Dependence=1
+Caption=
+PName=
+LineMode=0
+Bar1=960
+Bar2=820
+Bar3=490
+TermPos1=R
+TermPos2=R
+ZOrder=-17
+
+[Entity]
+PName=task_qualification
+LName=task_qualification
+Comment=
+TableInnerOption=
+TableOption=
+Page=MAIN
+Left=700
+Top=800
+Field="task_id","task_id","character varying(36)","NOT NULL",0,"","",$FFFFFFFF,""
+Field="qualification_type_id","qualification_type_id","character varying(36)","NOT NULL",1,"","",$FFFFFFFF,""
+Field="requirement_level","requirement_level","character varying(50)",,,"","",$FFFFFFFF,""
+Field="notes","notes","text",,,"","",$FFFFFFFF,""
+Field="created_at","created_at","timestamp(6) without time zone","NOT NULL",,"","",$FFFFFFFF,""
+Field="updated_at","updated_at","timestamp(6) without time zone","NOT NULL",,"","",$FFFFFFFF,""
+Index=idx_taskqual_qual=0,qualification_type_id
+EffectMode=None
+Color=$000000
+BkColor=$FFFFFF
+Position="MAIN",700,800
+ZOrder=-16
+
+[Relation]
+Entity1=qualification_type
+Entity2=rate_profile
+RelationType1=1
+RelationType2=3
+Fields1=qualification_type_id
+Fields2=qualification_type_id
+Cardinarity1=
+Cardinarity2=
+Position="MAIN",0,2800,6800,9600,R,R,""
+Dependence=0
+Caption=
+PName=
+LineMode=0
+Bar1=280
+Bar2=680
+Bar3=960
+TermPos1=R
+TermPos2=R
+ZOrder=-25
+
+[Relation]
+Entity1=request
+Entity2=quote
+RelationType1=2
+RelationType2=3
+Fields1=request_id
+Fields2=request_id
+Cardinarity1=
+Cardinarity2=
+Position="MAIN",0,3000,200,4118,R,R,""
+Dependence=0
+Caption=
+PName=
+LineMode=0
+Bar1=300
+Bar2=20
+Bar3=412
+TermPos1=R
+TermPos2=R
+ZOrder=-24
+
+[Relation]
+Entity1=shift_requirement
+Entity2=quote_line_item
+RelationType1=1
+RelationType2=3
+Fields1=shift_req_id
+Fields2=shift_req_id
+Cardinarity1=
+Cardinarity2=
+Position="MAIN",0,7800,9700,200,R,R,""
+Dependence=0
+Caption=
+PName=
+LineMode=0
+Bar1=780
+Bar2=970
+Bar3=20
+TermPos1=R
+TermPos2=R
+ZOrder=-23
+
+[Relation]
+Entity1=quote
+Entity2=quote_line_item
+RelationType1=2
+RelationType2=3
+Fields1=quote_id
+Fields2=quote_id
+Cardinarity1=
+Cardinarity2=
+Position="MAIN",0,9800,1700,8300,R,R,""
+Dependence=0
+Caption=
+PName=
+LineMode=0
+Bar1=980
+Bar2=170
+Bar3=830
+TermPos1=R
+TermPos2=R
+ZOrder=-22
+
+[Relation]
+Entity1=contract
+Entity2=invoice
+RelationType1=2
+RelationType2=3
+Fields1=contract_id
+Fields2=contract_id
+Cardinarity1=
+Cardinarity2=
+Position="MAIN",0,500,7000,9200,R,R,""
+Dependence=0
+Caption=
+PName=
+LineMode=0
+Bar1=50
+Bar2=700
+Bar3=920
+TermPos1=R
+TermPos2=R
+ZOrder=-21

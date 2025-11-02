@@ -1,0 +1,5 @@
+echo "frontend-vue/node_modules/" >> .gitignore
+echo "backend/target/" >> .gitignore
+echo ".idea/" >> .gitignore
+echo ".vscode/" >> .gitignore
+echo "*.log" >> .gitignore
